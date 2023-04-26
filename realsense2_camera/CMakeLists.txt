@@ -23,6 +23,8 @@ find_package(catkin REQUIRED COMPONENTS
     diagnostic_updater
     )
 
+find_package(OpenCV REQUIRED)
+
 if(BUILD_WITH_OPENMP)
     find_package(OpenMP)
     if(NOT OpenMP_FOUND)
@@ -88,7 +90,8 @@ include_directories(
     include
     ${realsense2_INCLUDE_DIR}
     ${catkin_INCLUDE_DIRS}
-    )
+    ${OpenCV_INCLUDE_DIRS}
+)
 
 # RealSense ROS Node
 catkin_package(
@@ -122,7 +125,8 @@ target_link_libraries(${PROJECT_NAME}
     ${realsense2_LIBRARY}
     ${catkin_LIBRARIES}
     ${CMAKE_THREAD_LIBS_INIT}
-    )
+    ${OpenCV_LIBRARIES}
+)
 
 if(WIN32)
 set_target_properties(${realsense2_LIBRARY} PROPERTIES MAP_IMPORTED_CONFIG_RELWITHDEBINFO RELEASE)
